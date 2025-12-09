@@ -5,33 +5,26 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [listings, setListings] = useState([]);
-  const [search, setSearch] = useState("");
   
   useEffect(() => {
     fetch("http://localhost:6001/listings")
-      .then((r) => {
-        if(!r.ok) { throw new Error("Failed to retrieve listings")}
+      .then(r => {
+        if (!r.ok) {throw new Error("failed to get listings") }
         return r.json()
       })
-      .then(listings => setListings(listings))
-      .catch(err => console.log(err))
+      .then(setListings)
+      .catch(error => console.log(error.message))
   }, []);
 
-  const addListing = newListing => setListings(previousListings => [...previousListings, newListing])
-
-  const updateListing = updatedListing => setListings(previousListings => previousListings.map(listing => listing.id === updatedListing.id ? updatedListing : listing))
-
-  const deleteListing = deletedListingId => setListings(previousListings => previousListings.filter(listing => listing.id !== deletedListingId))
-
-  const displayedListings = listings.filter((listing) =>
-    listing.description.toLowerCase().includes(search.toLowerCase())
-  );
+  function handleSubmitListing(addListing){
+    setListings([...listings, addListing])
+  }
 
   return (
     <div className="app">
-      <Header onSearch={setSearch} searchTerm={search} />
-      <ListingForm addListing={addListing} />
-      <ListingsContainer listings={displayedListings} updateListing={updateListing} deleteListing={deleteListing} />
+      <Header />
+      <ListingForm onSubmitListing={handleSubmitListing}/>
+      <ListingsContainer listings={listings}/>
     </div>
   );
 }

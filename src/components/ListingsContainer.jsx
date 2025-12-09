@@ -1,15 +1,14 @@
 import ListingCard from "./ListingCard";
 
-function ListingsContainer({ listings, updateListing, deleteListing }) {
+function ListingsContainer({ listings }) {
+
   return (
     <main>
       <ul className="cards">
 
         {listings.map(listing => <ListingCard 
           key={listing.id}
-          {...listing}
-          updateListing={updateListing} 
-          deleteListing={deleteListing}
+          listing={listing}
         />)}
       </ul>
     </main>
