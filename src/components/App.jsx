@@ -3,28 +3,29 @@ import ListingForm from "./ListingForm";
 import ListingsContainer from "./ListingsContainer";
 import { useState, useEffect } from "react";
 
-function App() {
-  const [listings, setListings] = useState([]);
-  
+function App() {  
+  const [listings, setListings] = useState([])
+
   useEffect(() => {
     fetch("http://localhost:6001/listings")
-      .then((r) => {
-        if(!r.ok) { throw new Error("Failed to retrieve listings")}
+      .then(r => {
+        if (!r.ok) {throw new Error("failed to get listings") }
         return r.json()
       })
-      .then(listings => setListings(listings))
-      .catch(err => console.log(err))
+      .then(setListings)
+      .catch(error => console.log(error.message))
   }, []);
 
-  function handleSubmitListing(addListing){
-    setListings([...listings, addListing])
-  }
+  const addListing = newListing => setListings(previousListings => [...previousListings, newListing])
 
+  // define function to update a listing in state
+  const updateListing = updatedListing => setListings(previousListings => previousListings.map(listing => listing.id === updatedListing.id ? updatedListing : listing))
+  
   return (
     <div className="app">
       <Header />
-      <ListingForm onSubmitListing={handleSubmitListing}/>
-      <ListingsContainer listings={listings}/>
+      <ListingForm addListing={addListing} />
+      <ListingsContainer listings={listings} updateListing={updateListing} />
     </div>
   );
 }
