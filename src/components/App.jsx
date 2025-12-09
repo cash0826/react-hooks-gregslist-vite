@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [listings, setListings] = useState([]);
+  const [search, setSearch] = useState("");
   
   useEffect(() => {
     fetch("http://localhost:6001/listings")
@@ -16,15 +17,21 @@ function App() {
       .catch(err => console.log(err))
   }, []);
 
-  function handleSubmitListing(addListing){
-    setListings([...listings, addListing])
-  }
+  const addListing = newListing => setListings(previousListings => [...previousListings, newListing])
+
+  const updateListing = updatedListing => setListings(previousListings => previousListings.map(listing => listing.id === updatedListing.id ? updatedListing : listing))
+
+  const deleteListing = deletedListingId => setListings(previousListings => previousListings.filter(listing => listing.id !== deletedListingId))
+
+  const displayedListings = listings.filter((listing) =>
+    listing.description.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="app">
-      <Header />
-      <ListingForm onSubmitListing={handleSubmitListing}/>
-      <ListingsContainer listings={listings}/>
+      <Header onSearch={setSearch} searchTerm={search} />
+      <ListingForm addListing={addListing} />
+      <ListingsContainer listings={displayedListings} updateListing={updateListing} deleteListing={deleteListing} />
     </div>
   );
 }

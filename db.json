@@ -48,55 +48,6 @@
       "image": "/images/treadmill.jpg",
       "location": "East Flatbush",
       "favorite": false
-    },
-    {
-      "id": "5d2a",
-      "description": "another heater",
-      "imageUrl": "/images/heater.jpg",
-      "location": "charlotte",
-      "favorite": false
-    },
-    {
-      "id": "9903",
-      "description": "another heater",
-      "imageUrl": "/images/heater.jpg",
-      "location": "charlotte",
-      "favorite": false
-    },
-    {
-      "id": "eb28",
-      "description": "another heater",
-      "imageUrl": "/images/heater.jpg",
-      "location": "charlotte",
-      "favorite": false
-    },
-    {
-      "id": "6184",
-      "description": "another heater",
-      "imageUrl": "/images/heater.jpg",
-      "location": "charlotte",
-      "favorite": false
-    },
-    {
-      "id": "f204",
-      "description": "another heater",
-      "imageUrl": "/images/heater.jpg",
-      "location": "charlotte",
-      "favorite": false
-    },
-    {
-      "id": "9090",
-      "description": "another heater",
-      "imageUrl": "\"/images/heater.jpg\"",
-      "location": "charlotte",
-      "favorite": false
-    },
-    {
-      "id": "b992",
-      "description": "one more heater",
-      "imageUrl": "https://m.media-amazon.com/images/I/9103N74QllL._AC_SL1500_.jpg",
-      "location": "charlotte",
-      "favorite": false
     }
   ]
 }
